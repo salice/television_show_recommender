@@ -5,13 +5,14 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 base_url = "https://www.springfieldspringfield.co.uk"
-res = requests.get(base)
-final_show_list = []
+res = requests.get(base_url)
+
 if res.status_code == 200:
     start = time.time()
     #there are 281 pages total
     base = "https://www.springfieldspringfield.co.uk/tv_show_episode_scripts.php"
     for i in range(1,282):
+        page_show_list = []
         url = base + "?page=" +str(i)
         res = requests.get(url)
         soup = BeautifulSoup(res.content, "lxml")
@@ -38,8 +39,10 @@ if res.status_code == 200:
                 scripts["episode_name"] = script_page.find("h3").text.strip()
                 scripts["show_name"] = script_page.find("h1").text.strip()
                 #print(scripts)
-                final_show_list.append(scripts)
+                page_show_list.append(scripts)
                 time.sleep(5)
 
-script_df = pd.DataFrame(final_show_list)
-script_df.to_csv("./data/springfieldspringfield-scrape.csv", index=False)
+        script_df = pd.DataFrame(page_show_list)
+        script_df.to_csv("./data/springfield/springfield-scrape-page-" + str(i) + ".csv", index=False)
+        elapsed = round((time.time() - start) / 60, 2)
+        print(f"Page {i} is done and it took {elapsed} minutes")
