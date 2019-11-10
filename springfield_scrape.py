@@ -11,13 +11,14 @@ if res.status_code == 200:
     start = time.time()
     #there are 281 pages total
     base = "https://www.springfieldspringfield.co.uk/tv_show_episode_scripts.php"
-    for i in range(1,282):
+    for i in range(21,282):
         page_show_list = []
         url = base + "?page=" +str(i)
         res = requests.get(url)
         soup = BeautifulSoup(res.content, "lxml")
         episode_page = soup.html
         episodes = episode_page.find_all("a",  {"class":"script-list-item"}) 
+        time.sleep(5)
         #print(episodes)
         for episode in episodes:
             episode_url = base_url +str(episode.attrs["href"])
@@ -26,6 +27,7 @@ if res.status_code == 200:
             soup_episode = BeautifulSoup(res_episode.content, "lxml")
             show_page = soup_episode.html
             shows = show_page.find_all("a", {"class": "season-episode-title"})
+            time.sleep(5)
 
             for show in shows:
                 scripts = {}
