@@ -3,7 +3,7 @@ ____
 ### Executive Summary
 ____
 
-I analyzed the transcripts of 114,000 television episodes from 4,667 different television shows using Latent Dirichlet Allocation in order to find clusters of common language between different shows. and to then take those similarities to build a content based recommender for television shows. 
+I analyzed the transcripts of 117,937 television episodes from 4,667 different television shows using Latent Dirichlet Allocation in order to find clusters of common language between different shows. and to then take those similarities to build a content based recommender for television shows. 
 
 ### System Requirements
 ____
